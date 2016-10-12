@@ -5,6 +5,7 @@
 #define DEBUG
 /*#define LOG_LEVEL LOG_INFO*/
 /*#define LOG_DIS_STD_PREFIX_LINE*/
+#define LOG_DIS_COLOR
 
 #include "../log.h"
 

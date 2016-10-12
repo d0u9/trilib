@@ -8,6 +8,8 @@
  */
 #define DEBUG
 
+//#define LOG_DIS_COLOR
+
 //#define LOG_EN_STD_LEVEL_NUM
 
 //#define LOG_LEVEL LOG_INFO

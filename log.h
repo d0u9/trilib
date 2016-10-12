@@ -107,6 +107,10 @@
 
 extern const char *__log_level_str[];
 
+#ifndef LOG_DIS_COLOR
+extern const char *__log_level_str_color[];
+#endif
+
 #ifdef LOG_EN_FILE_LOG
 extern FILE *__log_file_fp;
 extern int init_log(const char *path, const char *mode);
@@ -239,9 +243,16 @@ void __printl_std(char *msg, const char *level,
 	char pre_level[5];
 	make_symbol(pre_level, 7, 0, 0, "[", "] ", level, "%s");
 # else
+#  ifdef LOG_DIS_COLOR
 	char pre_level[10];
 	make_symbol(pre_level, 10, 0, 0, "[", "] ",
 		    __log_level_str[LOG_LEVEL_INT(level)], "%-6s");
+#  else
+
+	char pre_level[32];
+	make_symbol(pre_level, 32, 0, 0, "", " ",
+		    __log_level_str_color[LOG_LEVEL_INT(level)], "%-20s");
+#  endif
 # endif
 #endif
 
