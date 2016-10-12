@@ -5,6 +5,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+typedef _Bool		bool;
+
 typedef uint8_t		u8;
 typedef uint16_t	u16;
 typedef uint32_t	u32;
@@ -13,6 +15,9 @@ typedef int8_t		s8;
 typedef int16_t		s16;
 typedef int32_t		s32;
 typedef int64_t		s64;
+
+#define TRUE		(1 == 1)
+#define FALSE		(1 == 0)
 
 #define U8_MAX		((u8)~0U)
 #define S8_MAX		((s8)(U8_MAX>>1))
