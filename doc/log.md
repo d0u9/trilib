@@ -46,8 +46,8 @@ Here is a full list of macros:
 
 By default, log to file function is disabled. Define `LOG_EN_FILE_LOG`
 macro to enable file logging. It is better to define this macro globally,
-due to the fact that this behavior affects each source files in your
-project.
+e.g. add `-DLOG_EN_FILE_LOG` option to gcc. It is due to the fact that
+this behavior affects each source files in your project.
 
 Another noticeable fact is that the thread implementation is variable.
 In other word, besides `pthread` implementation, there exist some other
@@ -58,8 +58,12 @@ Print **PID** and **TID** is disabled by default, most of time, they are
 useless. But you can enable them anytime by defining `LOG_EN_PREFIX_PID`
 and `LOG_EN_PREFIX_TID`.
 
+The defalut log level is `notice`, which measn debug information won't be
+printed unless you defined `DEBUG` macro somewhere.
+
+
 # ScreenShots
 
-![](pics/log1.png)
+[Screen shot 1](pics/log1.png)
 
 
