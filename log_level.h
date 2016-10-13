@@ -12,4 +12,13 @@
 
 #define LOG_LEVEL_INT(x)	((x)[0] - '0')
 
+#define LOG_EMERG_STR		"EMERG"
+#define LOG_ALERT_STR		"ALERT"
+#define LOG_CRIT_STR		"CRIT"
+#define LOG_ERR_STR		"ERR"
+#define LOG_WARNING_STR		"WARN"
+#define LOG_NOTICE_STR		"NOTICE"
+#define LOG_INFO_STR		"INFO"
+#define LOG_DEBUG_STR		"DEBUG"
+
 #endif

@@ -5,14 +5,14 @@
 #include "log.h"
 
 const char *__log_level_str[] = {
-				"EMERG",
-				"ALERT",
-				"CRIT",
-				"ERR",
-				"WARN",
-				"NOTICE",
-				"INFO",
-				"DEBUG"
+				LOG_EMERG_STR,
+				LOG_ALERT_STR,
+				LOG_CRIT_STR,
+				LOG_ERR_STR,
+				LOG_WARNING_STR,
+				LOG_NOTICE_STR,
+				LOG_INFO_STR,
+				LOG_DEBUG_STR,
 				};
 #ifndef LOG_DIS_COLOR
 #include "color.h"
