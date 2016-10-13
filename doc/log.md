@@ -64,6 +64,6 @@ printed unless you defined `DEBUG` macro somewhere.
 
 # ScreenShots
 
-[Screen shot 1](pics/log1.png)
+![](pics/log1.png)
 
 
