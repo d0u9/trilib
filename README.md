@@ -7,6 +7,12 @@ Due to the fact that GNU Linux Kernel is compiled with GNU gcc, functions and ro
 
 Best regards.
 
+# Flags for compiling
+
+It is necessary to compile with `-std=gnu99` flag to avoid warnings and errors. As described above, some GNU gcc's extension are used here.
+
+Also, some library uses `pthread`, `-lpthread` flags is needed as well.
+
 ---
 
 # License

@@ -116,7 +116,7 @@ extern FILE *__log_file_fp;
 extern int init_log(const char *path, const char *mode);
 extern void exit_log(void);
 #else
-static inline int init_log(const char *path, const char *mode) {}
+static inline int init_log(const char *path, const char *mode) { return 0;}
 static inline void exit_log(void) {}
 #endif
 
