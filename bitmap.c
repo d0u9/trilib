@@ -17,8 +17,9 @@ int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,
 }
 
 void __bitmap_or(unsigned long *dst, const unsigned long *bitmap1,
-				const unsigned long *bitmap2, unsigned int bits)
-{ unsigned int k;
+		 const unsigned long *bitmap2, unsigned int bits)
+{
+	unsigned int k;
 	unsigned int nr = BITS_TO_LONGS(bits);
 
 	for (k = 0; k < nr; k++)
@@ -26,7 +27,7 @@ void __bitmap_or(unsigned long *dst, const unsigned long *bitmap1,
 }
 
 void __bitmap_xor(unsigned long *dst, const unsigned long *bitmap1,
-				const unsigned long *bitmap2, unsigned int bits)
+		  const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k;
 	unsigned int nr = BITS_TO_LONGS(bits);
@@ -36,7 +37,7 @@ void __bitmap_xor(unsigned long *dst, const unsigned long *bitmap1,
 }
 
 int __bitmap_equal(const unsigned long *bitmap1,
-		const unsigned long *bitmap2, unsigned int bits)
+		   const unsigned long *bitmap2, unsigned int bits)
 {
 	unsigned int k, lim = bits/BITS_PER_LONG;
 	for (k = 0; k < lim; ++k)
@@ -96,7 +97,7 @@ unsigned long find_first_bit(const unsigned long *addr, unsigned long size)
 
 	for (idx = 0; idx * BITS_PER_LONG < size; idx++) {
 		if (addr[idx])
-			return min(idx * BITS_PER_LONG + __ffs(addr[idx]), size);
+			return min(idx * BITS_PER_LONG + ffs(addr[idx]), size);
 	}
 
 	return size;
