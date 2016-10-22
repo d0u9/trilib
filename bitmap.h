@@ -2,7 +2,6 @@
 #define _TRI_BITMAP_H
 
 #include <string.h>
-#include <strings.h>
 #include "core.h"
 
 extern unsigned long find_first_bit(const unsigned long *addr,
@@ -20,6 +19,7 @@ extern void __bitmap_xor(unsigned long *dst, const unsigned long *bitmap1,
 extern int __bitmap_equal(const unsigned long *bitmap1,
 			  const unsigned long *bitmap2, unsigned int nbits);
 
+#define ffs(x)		__ffs(x)
 #define ffz(x)		ffs(~(x))
 
 #define BITS_PER_BYTE		8
@@ -34,6 +34,37 @@ extern int __bitmap_equal(const unsigned long *bitmap1,
 
 #define DECLARE_BITMAP(name,bits) \
 	unsigned long name[BITS_TO_LONGS(bits)]
+
+static inline unsigned long __ffs(unsigned long word)
+{
+	int num = 0;
+
+#if BITS_PER_LONG == 64
+	if ((word & 0xffffffff) == 0) {
+		num += 32;
+		word >>= 32;
+	}
+#endif
+	if ((word & 0xffff) == 0) {
+		num += 16;
+		word >>= 16;
+	}
+	if ((word & 0xff) == 0) {
+		num += 8;
+		word >>= 8;
+	}
+	if ((word & 0xf) == 0) {
+		num += 4;
+		word >>= 4;
+	}
+	if ((word & 0x3) == 0) {
+		num += 2;
+		word >>= 2;
+	}
+	if ((word & 0x1) == 0)
+		num += 1;
+	return num;
+}
 
 static inline void bitmap_zero(unsigned long *dst, int nbits)
 {
@@ -161,5 +192,33 @@ static inline bool test_bit(unsigned long nr, volatile void *addr)
 #endif
 	return ((*a & mask) != 0);
 }
+
+#define find_next_bit(addr,size,offset)				\
+	_find_next_bit(addr, size, offset, 0UL)
+
+#define find_next_zero_bit(addr,size,offset)			\
+	_find_next_bit(addr, size, offset, ~0UL)
+
+#define for_each_set_bit(bit, addr, size)			\
+	for ((bit) = find_first_bit((addr), (size));		\
+	     (bit) < (size);					\
+	     (bit) = find_next_bit((addr), (size), (bit) + 1))
+
+/* same as for_each_set_bit() but use bit as value to start with */
+#define for_each_set_bit_from(bit, addr, size)			\
+	for ((bit) = find_next_bit((addr), (size), (bit));	\
+	     (bit) < (size);					\
+	     (bit) = find_next_bit((addr), (size), (bit) + 1))
+
+#define for_each_clear_bit(bit, addr, size)			\
+	for ((bit) = find_first_zero_bit((addr), (size));	\
+	     (bit) < (size);					\
+	     (bit) = find_next_zero_bit((addr), (size), (bit) + 1))
+
+/* same as for_each_clear_bit() but use bit as value to start with */
+#define for_each_clear_bit_from(bit, addr, size)		\
+	for ((bit) = find_next_zero_bit((addr), (size), (bit));	\
+	     (bit) < (size);					\
+	     (bit) = find_next_zero_bit((addr), (size), (bit) + 1))
 
 #endif
