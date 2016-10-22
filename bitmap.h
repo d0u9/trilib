@@ -8,6 +8,9 @@ extern unsigned long find_first_bit(const unsigned long *addr,
 				    unsigned long size);
 extern unsigned long find_first_zero_bit(const unsigned long *addr,
 					 unsigned long size);
+extern unsigned long _find_next_bit(const unsigned long *addr,
+				    unsigned long nbits, unsigned long start,
+				    unsigned long invert);
 extern void bitmap_set(unsigned long *map, unsigned int start, int len);
 extern void bitmap_clear(unsigned long *map, unsigned int start, int len);
 extern int __bitmap_and(unsigned long *dst, const unsigned long *bitmap1,

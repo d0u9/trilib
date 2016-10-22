@@ -62,5 +62,10 @@ int main(void)
 	printf("test bit99 in tmp");
 	printf(" test_bit(99, tmp) = %d\n", test_bit(99, tmp));
 
+	unsigned long bit;
+	for_each_set_bit(bit, tmp, 128) {
+		printf("%lu bit is set\n", bit);
+	}
+
 	return 0;
 }
