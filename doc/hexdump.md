@@ -11,17 +11,23 @@ inconvenience to run GDB each time.
 
 ## Global Variables
 
-    const char hex_asc[]
+```
+const char hex_asc[]
+```
 
 Char array to convert integer type of number to hex correspond chars.
 
-    hex_asc_upper[]
+```
+hex_asc_upper[]
+```
 
 Same as hex_asc[] but in upper case.
 
 ## API
 
-    int hex_to_bin(char ch)
+```
+int hex_to_bin(char ch)
+```
 
 Convert a hex digit to its real value.
 
@@ -29,7 +35,9 @@ Convert a hex digit to its real value.
 - RETURN: if `ch` is not a valid hex char, -1 will be return.
 
 
-    int hex2bin(u8 *dst, const char *src, size_t count)
+```
+int hex2bin(u8 *dst, const char *src, size_t count)
+```
 
 Convert an ascii hexadecimal string to its binary representation.
 
@@ -39,7 +47,9 @@ Convert an ascii hexadecimal string to its binary representation.
 - RETURN: 0 on success, -1 in case of bad input.
 
 
-    char *bin2hex(char *dst, const void *src, size_t count)
+```
+char *bin2hex(char *dst, const void *src, size_t count)
+```
 
 Convert binary data to an ascii hexadecimal string.
 
@@ -49,10 +59,11 @@ Convert binary data to an ascii hexadecimal string.
 - RETURN: `dst` string.
 
 
-
-    void hex_dump_to_buffer(const void *buf, size_t len, int rowsize,
+```
+void hex_dump_to_buffer(const void *buf, size_t len, int rowsize,
                             int groupsize, char *linebuf, size_t linebuflen,
                             bool ascii)
+```
 
 Convert a blob of data to "hex ASCII" in memory. hex_dump_to_buffer() works on
 one "line" of output at a time, i.e., 16 or 32 bytes of input data converted
@@ -68,9 +79,11 @@ to hex + ASCII output.
 - `ascii`: include ASCII after the hex output.
 
 
-    void fprint_hex_dump(FILE *fp, const char *level, const char *prefix_str,
+```
+void fprint_hex_dump(FILE *fp, const char *level, const char *prefix_str,
                          int prefix_type, int rowsize, int groupsize,
                          const void *buf, size_t len, bool ascii)
+```
 
 Print a text hex dump to a file pointer, Given a buffer of u8 data,
 fprint_hex_dump() prints a hex + ASCII dump to the kernel log at the
@@ -90,11 +103,10 @@ specified kernel log level, with an optional leading prefix.
 - `ascii: include ASCII after the hex output
 
 
-    print_hex_dump(level, prefix_str, prefix_type, rowsize,
+```
+print_hex_dump(level, prefix_str, prefix_type, rowsize,
                    groupsize, buf, len, ascii)
+```
 
 Same as fprint_hex_dump() but used stdout.
-
-
-
 
