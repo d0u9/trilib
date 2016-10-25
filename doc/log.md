@@ -1,12 +1,14 @@
 # LOG module
 
+
+## Introduction
+
 A preprocessor macro controlled log module.
 
-# Introduction
 Users are allowed to control all the details of log information with defining
 appropriate macros.
 
-# Setting Options
+## Setting Options
 
 Here is a full list of macros:
 
@@ -43,7 +45,7 @@ Here is a full list of macros:
     #define LOG_DIS_PREFIX_TID
 
 
-# Default Behavior
+## Default Behavior
 
 By default, log to file function is disabled. Define `LOG_EN_FILE_LOG`
 macro to enable file logging. It is better to define this macro globally,
@@ -63,11 +65,11 @@ The defalut log level is `notice`, which measn debug information won't be
 printed unless you defined `DEBUG` macro somewhere.
 
 
-# ScreenShots
+## ScreenShots
 
 ![](pics/log1.png)
 
-# API
+## API
 
     init_log(const char *path, const char *mode)
 
