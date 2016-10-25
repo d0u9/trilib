@@ -49,9 +49,9 @@ macro to enable file logging. It is better to define this macro globally,
 e.g. add `-DLOG_EN_FILE_LOG` option to gcc. It is due to the fact that
 this behavior affects each source files in your project.
 
-Another noticeable fact is that the thread implementation is variable.
-In other word, besides `pthread` implementation, there exist some other
-thread libraries, such as Apple's Grand Central Dispatch(GCD).If you
+Another noticeable fact is that the thread implementation is variable according
+to the platform. In other word, besides `pthread` implementation, there exist
+some other thread libraries, such as Apple's Grand Central Dispatch(GCD).If you
 happen to use these libs. You should modify the `get_tid()` function.
 
 Print **PID** and **TID** is disabled by default, most of time, they are
