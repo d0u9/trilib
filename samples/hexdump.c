@@ -35,7 +35,7 @@ int main(void)
 	printf("%s\n", buf1);
 
 	printf("----------------------------------------------------------\n");
-	print_hex_dump(LOG_DEBUG, "raw data: ", DUMP_PREFIX_ADDRESS,
+	print_hex_dump(LOG_DEBUG_STR, " raw data: ", DUMP_PREFIX_ADDRESS,
 			16, 1, (void *)&v32, 128, TRUE);
 
 	return 0;
