@@ -12,6 +12,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <color.h>
 
 #include "core.h"
 #include "log_level.h"
@@ -296,8 +297,17 @@ void __printl_std(char *msg, const char *level,
 	make_symbol(pre_tid, 32, 0, 0, "tid:", " ", tid, "%s");
 #endif
 
-	snprintf(msg, MAX_LOG_BUFFER, "%s%s%s%s%s%s-> %s",
-		 pre_level, pre_time, pre_pid, pre_tid, pre_line, pre_file, fmt);
+#  ifdef LOG_DIS_COLOR
+	const char arrow[3] = "->";
+#  else
+
+	char arrow[33] = "->";
+	color_string(YELLOW, ON_NORMAL, BOLD, arrow, 33);
+	
+#  endif
+
+	snprintf(msg, MAX_LOG_BUFFER, "%s%s%s%s%s%s%s %s",
+		 pre_level, pre_time, pre_pid, pre_tid, pre_line, pre_file, arrow, fmt);
 	vfprintf(LOG_STD_FP, msg, args);
 	fflush(LOG_STD_FP);
 }
