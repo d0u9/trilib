@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-#define COLOR_START_LEN		10
 #define COLOR_END_LEN		4
 
 #define COLOR_START		"\033["
@@ -75,6 +74,7 @@ static inline int color_string(enum fg_color fg, enum bg_color bg,
 			       enum font_style fs, char *buf, int len)
 {
 	int len_str, len_ret;
+	int color_start_len = 0;
 	char color_start[11] = {0};
 
 	if (fg == NORMAL && bg == ON_NORMAL && fs == STYLE_NORMAL)
@@ -82,22 +82,40 @@ static inline int color_string(enum fg_color fg, enum bg_color bg,
 
 	len_str = strnlen(buf, len);
 
-	len_ret = len_str + COLOR_START_LEN + COLOR_END_LEN;
+	snprintf(color_start + color_start_len, 4, "\033[%1s",
+		 font_style_table[fs]);
+	color_start_len += 3;
+
+	if (fg != NORMAL) {
+		snprintf(color_start + color_start_len, 4, ";%2s",
+			 fg_color_table[fg]);
+		color_start_len += 3;
+	}
+
+	if (bg != ON_NORMAL) {
+		snprintf(color_start + color_start_len, 4, ";%2s",
+			 bg_color_table[bg]);
+		color_start_len += 3;
+	}
+
+	snprintf(color_start + color_start_len, 2, "m");
+	color_start_len += 1;
+
+	len_ret = len_str + color_start_len + COLOR_END_LEN;
 
 	if (len <= len_ret) {
 		return -1;
 	}
 
-	snprintf(color_start, 11, "\033[%1s;%2s;%2sm",
-		 font_style_table[fs], fg_color_table[fg], bg_color_table[bg]);
 
-	memcpy(buf + len_str + COLOR_START_LEN, end_of_color, COLOR_END_LEN);
 
-	for (int i = COLOR_START_LEN + len_str; i - COLOR_START_LEN > 0; --i) {
-		buf[i - 1] = buf[i - COLOR_START_LEN - 1];
+	memcpy(buf + len_str + color_start_len, end_of_color, COLOR_END_LEN);
+
+	for (int i = color_start_len + len_str; i - color_start_len > 0; --i) {
+		buf[i - 1] = buf[i - color_start_len - 1];
 	}
 
-	memcpy(buf, color_start, COLOR_START_LEN);
+	memcpy(buf, color_start, color_start_len);
 
 	return 0;
 }
